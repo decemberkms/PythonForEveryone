@@ -18,3 +18,27 @@ counts = dict()
 names = ['cse']
 for name in names:
     counts[name] = counts.get(name, 0) + 1
+
+
+name = input("Enter file:")
+if len(name) < 1:
+    name = "mbox-short.txt"
+
+handle = open(name)
+
+mydict = dict()
+
+for line in handle:
+    if not line.startswith("From:"):
+        continue
+    email = line.split()[1]
+    mydict[email] = mydict.get(email,0) + 1
+
+largest = None
+theone = None
+
+for k, v in mydict.items():
+	if (theone is None) or (v > largest):
+        largest = v
+        theone = k
+print(k,v)
